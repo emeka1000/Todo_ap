@@ -23,11 +23,19 @@ export default function App() {
     });
   };
 
+  const cancelGoalAdditionHandler = () => {
+    setOpenAddMode(false);
+  };
+
   return (
     <View style={styles.container}>
       <Button title={"Add New Goal"} onPress={() => setOpenAddMode(true)} />
-      <GoalInput visible={openAddMode} onAddGoal={addGoalHandler} />
-      <Text>Tap to delete</Text>
+      <GoalInput
+        visible={openAddMode}
+        onAddGoal={addGoalHandler}
+        onCancel={cancelGoalAdditionHandler}
+      />
+      <Text style={styles.text}>Tap to delete</Text>
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={Goals}
@@ -46,9 +54,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 50,
     flex: 1,
     padding: 50,
     backgroundColor: "#fff",
     justifyContent: "center",
+  },
+  text: {
+    textAlign: "center",
+    marginTop: 30,
+    marginBottom: 10,
   },
 });
